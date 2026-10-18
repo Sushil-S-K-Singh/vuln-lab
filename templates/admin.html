@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}VULNLAB // Admin{% endblock %}
+{% block content %}
+<section class="hero">
+  <h1>Admin Console <span class="cursor">_</span></h1>
+  <p>Restricted area. Access granted to <strong>{{ user }}</strong>.</p>
+</section>
+
+<div class="panel wide" style="margin-top:24px;">
+  <h2 style="margin-top:0;color:#fff;">Congratulations!</h2>
+  <p class="muted">You bypassed authentication and reached the admin panel. Here is your flag:</p>
+  <div class="flag">{{ flag }}</div>
+  <p class="muted" style="margin-top:18px;">
+    Next challenge: use the <a href="{{ url_for('ping') }}">network tool</a> to get a
+    shell on this box, then read <code class="inline">/root/root.txt</code> (if present)
+    or run <code class="inline">id</code> / <code class="inline">whoami</code>.
+  </p>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}VULNLAB // Dashboard{% endblock %}
+{% block content %}
+<section class="hero">
+  <h1>Welcome, {{ user }} <span class="cursor">_</span></h1>
+  <p>You are authenticated. Session role:
+    <span class="tag {% if role == 'admin' %}easy{% else %}medium{% endif %}">{{ role }}</span>
+  </p>
+</section>
+
+<div class="grid">
+  <div class="card">
+    <h3>Network Tool</h3>
+    <p>Run a ping from the server. Useful for "checking connectivity" &mdash; and for something else.</p>
+    <a class="btn" href="{{ url_for('ping') }}">Open /tools/ping</a>
+  </div>
+
+  <div class="card">
+    <h3>Admin Panel</h3>
+    <p>The flag lives here. {% if role == 'admin' %}You have access!{% else %}You need the admin role.{% endif %}</p>
+    <a class="btn ghost" href="{{ url_for('admin') }}">Open /admin</a>
+  </div>
+
+  <div class="card">
+    <h3>System Info (API)</h3>
+    <p>A small JSON endpoint that leaks basic server details.</p>
+    <a class="btn ghost" href="{{ url_for('api_whoami') }}">GET /api/whoami</a>
+  </div>
+</div>
+
+{% if role == 'admin' %}
+  <div class="alert ok" style="margin-top:24px;">
+    You bypassed authentication as <strong>admin</strong>. Head to the
+    <a href="{{ url_for('admin') }}">admin panel</a> to grab the flag.
+  </div>
+{% else %}
+  <div class="alert warn" style="margin-top:24px;">
+    You're logged in as a normal user. To reach the flag you need the <strong>admin</strong> role.
+    Revisit the login page and think about <em>which</em> user you authenticate as.
+  </div>
+{% endif %}
+{% endblock %}

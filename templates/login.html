@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}VULNLAB // Login{% endblock %}
+{% block content %}
+<div class="panel">
+  <h2 style="margin-top:0;color:#fff;">Sign in</h2>
+  <p class="muted">Employee portal authentication.</p>
+
+  {% if error %}<div class="alert err">{{ error }}</div>{% endif %}
+
+  <form method="post" action="{{ url_for('login') }}">
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" autocomplete="off" placeholder="username">
+
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" autocomplete="off" placeholder="password">
+
+    <button type="submit">Authenticate</button>
+  </form>
+
+  {% if query %}
+    <p class="muted" style="margin-top:20px;">Query executed on the server:</p>
+    <pre class="console"><span class="cmd">{{ query }}</span></pre>
+  {% endif %}
+
+  <p class="hint" style="margin-top:20px;">
+    Hint: the form is a classic SQL injection target. What happens if you put a single
+    quote <code class="inline">'</code> in the username field?
+  </p>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}VULNLAB // Network Tool{% endblock %}
+{% block content %}
+<div class="panel wide">
+  <h2 style="margin-top:0;color:#fff;">Network Connectivity Tool</h2>
+  <p class="muted">Enter a hostname or IP address to ping from the server.</p>
+
+  <form method="post" action="{{ url_for('ping') }}">
+    <label for="host">Host</label>
+    <input type="text" id="host" name="host" autocomplete="off" placeholder="127.0.0.1" value="{{ request.form.get('host','') }}">
+    <button type="submit">Ping</button>
+  </form>
+
+  {% if cmd %}
+    <p class="muted" style="margin-top:20px;">Command executed on the server:</p>
+    <pre class="console"><span class="cmd">{{ cmd }}</span></pre>
+  {% endif %}
+
+  {% if output %}
+    <p class="muted">Output:</p>
+    <pre class="console">{{ output }}</pre>
+  {% endif %}
+
+  <p class="hint" style="margin-top:20px;">
+    Hint: your input is concatenated into a shell command. Shell metacharacters like
+    <code class="inline">;</code> <code class="inline">&&</code>
+    <code class="inline">|</code> <code class="inline">$(...)</code> might do interesting things.
+  </p>
+</div>
+{% endblock %}

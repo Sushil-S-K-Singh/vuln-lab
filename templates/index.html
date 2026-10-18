@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}VULNLAB // Home{% endblock %}
+{% block content %}
+<section class="hero">
+  <h1>root@vulnlab:~# <span class="cursor">_</span></h1>
+  <p>A deliberately vulnerable web application for hands-on security training.</p>
+  <p>
+    <span class="tag easy">SQL Injection</span>
+    <span class="tag easy">Command Injection</span>
+    <span class="tag medium">RCE / Reverse Shell</span>
+  </p>
+</section>
+
+<div class="grid">
+  <div class="card">
+    <h3>1 &middot; Login Panel</h3>
+    <p>An authentication form that builds its SQL query by string concatenation. Can you get in without a password?</p>
+    <span class="badge">SQL Injection</span><br>
+    <a class="btn" href="{{ url_for('login') }}">Open /login</a>
+  </div>
+
+  <div class="card">
+    <h3>2 &middot; Network Tool</h3>
+    <p>A "ping" utility that passes your input straight to the system shell. Can you make it run <em>your</em> command?</p>
+    <span class="badge">OS Command Injection</span><br>
+    <a class="btn" href="{{ url_for('ping') }}">Open /tools/ping</a>
+  </div>
+
+  <div class="card">
+    <h3>3 &middot; Admin Panel</h3>
+    <p>The flag is hidden behind an admin-only page. Chain your findings to reach it.</p>
+    <span class="badge">Privilege & Post-Exploitation</span><br>
+    <a class="btn ghost" href="{{ url_for('admin') }}">Open /admin</a>
+  </div>
+</div>
+
+<div class="alert warn" style="margin-top:26px;">
+  <strong>Lab notice:</strong> This app is intentionally insecure. Run it only on an isolated
+  local machine or lab network. Never expose it to the public internet.
+</div>
+
+<p class="muted" style="margin-top:22px;">
+  New here? Read <code class="inline">README.md</code> to start the server and
+  <code class="inline">WALKTHROUGH.md</code> for the guided solution (spoilers!).
+</p>
+{% endblock %}
